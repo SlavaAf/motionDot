@@ -1,0 +1,78 @@
+/* Fonts
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+@font-face {
+  font-family: 'PT';
+  src:  local("PT Sans-bold"),
+        local("pt-sans-bold"),
+        local("pt sans bold"),
+        url('../fonts/PT_Sans-Web-Bold.ttf') format('truetype');
+  font-weight: 700;
+}
+@font-face {
+  font-family: 'PT';
+  src:  local("ptsans"),
+        local("pt-sans"),
+        local("pt sans"),
+        url('../fonts/PT_Sans-Web-Regular.ttf') format('truetype');
+  font-weight: 400;
+}
+/* 0.0 General
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+:root{
+}
+
+/* 1.0 Reset
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+html {
+  font-family: 'PT' sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+}
+body {
+  margin: 0;
+  // background-color: #2b2828;
+  // background-image: url(../images/back.png);
+  // background-repeat: repeat;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+  display: block;
+}
+
+a {
+  background-color: transparent;
+  // color: var(--color_url);
+  // text-decoration: none;
+}
+
+a:matches(:hover, :any-link) {
+  outline: 0;
+}
+
+img {
+  border: 0;
+}
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+.container{
+  // width: 770px;
+  width: 1124px;
+  margin: * auto;
+  clear: fix-legacy;
+}
+
+.clearfix {
+  clear: fix-legacy;
+}
+/* header
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+@import "header.css";
+/* main
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+@import "main.css";
+

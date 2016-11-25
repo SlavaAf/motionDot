@@ -1,0 +1,9 @@
+.main{
+	width: 100%;
+	float: left;
+  	clear: fix-legacy;
+}
+.slider{
+	size: 100vw 100vh;
+	background-color: #151c24;
+}
