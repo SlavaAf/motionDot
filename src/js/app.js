@@ -1,7 +1,7 @@
 var header = document.querySelector("header"),
 	time = 5,
-	num = 10,
-	size = 1,
+	num = 300,
+	size = 4,
 	space = 18,
 	color = "#a4a5a6";
 
@@ -12,7 +12,9 @@ function motionDot(parent, number, time, size, space, color){
 	var canvas = document.createElement("canvas"),
 		ctx = canvas.getContext("2d"),
 		time = 5,
-		position = [100, 100];
+		position = [100, 100],
+		mouseX = 999,
+		mouseY = 999;
 
 	parent.appendChild(canvas);
 	canvas.width  = parent.offsetWidth;
@@ -20,38 +22,38 @@ function motionDot(parent, number, time, size, space, color){
 	canvas.style.position = "absolute";
     canvas.style.left = "0px";
     canvas.style.top = "0px";
-    canvas.style.zIndex = "-1";
+    // canvas.style.zIndex = "-1";
 	// console.log(canvas);
 	this.init = function(){
 		if(canvas){
-			var a = canvas.width / space,
-				b = canvas.height / space;
-			// console.log(a);
-			// console.log(b);
-			// for(i=1; i <= a; i++){
-			// 	_draw_line_vertical(ctx, (space * i), canvas.height);
-			// }
-			// for(i=1; i <= Math.floor(b); i++){
-			// 	_draw_line_horizontal(ctx, (space * i), canvas.width);
-			// }
-			for(i = 1; i <= number; i++){
-				_draw_circle(ctx, size, color, [_randomX(), _randomY()])
-				// _draw_circle(ctx, size, color, random_new())
-				// _random_new();
-			}
-			// _round_elementsX();
+
+			_draw_circle();
+			// requestAnimationFrame(_draw_circle());
+			// canvas.addEventListener("mousedown", function(event){
+			// 	_click_dot(event);
+			// });
+    		canvas.addEventListener('mousemove', function(event){
+    			_click_dot(event)
+    		});
 		};
 
 	}
 /*-------------------------------------------*/
 /*  Private Function                         */
 /*-------------------------------------------*/
-	_draw_circle = function(el, size, color, position){
-		el.beginPath();
-		// arc(x, y, radius, startAngle, endAngle, anticlockwise);
-		el.arc(position[0], position[1], size, 0, Math.PI*2, false);
-		el.fillStyle = color;
-		el.fill();
+	_draw_circle = function(){
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		for(i = 1; i <= number; i++){
+			ctx.beginPath();
+			// arc(x, y, radius, startAngle, endAngle, anticlockwise);
+			ctx.arc(_randomX(), _randomY(), size, 0, Math.PI*2, false);
+			ctx.fillStyle = color;
+	        // if(ctx.isPointInPath(mouseX,mouseY)){
+	        //     ctx.fillStyle = 'red';
+	        // }
+			ctx.fill();
+		};
+		// requestAnimationFrame(_draw_circle());
 	};
 
 	_randomX = function(){
@@ -126,8 +128,39 @@ function motionDot(parent, number, time, size, space, color){
 /*-------------------------------------------*/
 /*  Hover dot                                */
 /*-------------------------------------------*/
-	_hover_dot = function(){
+	_findOffset = function(obj) {
+	    var curX = curY = 0;
+	    if (obj.offsetParent) {
+	        do {
+	            curX += obj.offsetLeft;
+	            curY += obj.offsetTop;
+	        } while (obj = obj.offsetParent);
+	    return {x:curX,y:curY};
+	    }
+	};
+	_updateCanvas = function(e){
+	    var pos = _findOffset(canvas);
+	    
+	    mouseX = e.pageX - pos.x;
+	    mouseY = e.pageY - pos.y;
+	    
+	    // ctx.clearRect(0,0,canvas.width,canvas.height);
+	    // drawCanvas();
+	    // _draw_circle();
+	}
 
+	_click_dot = function(event){
+		var x = event.pageX - canvas.offsetLeft,
+			y = event.pageY - canvas.offsetTop;
+	    // var pos = _findOffset(canvas);
+	    
+	    // mouseX = event.pageX - pos.x;
+	    // mouseY = event.pageY - pos.y;
+	    // mouseX = event.pageX - canvas.offsetLeft;
+	    // mouseY = event.pageY - canvas.offsetTop;
+		// ctx.isPointInPath(x, y);
+		console.log(ctx.isPointInPath(x, y))
+		console.log(x +"fuck"+ y)
 	}
 
 /*-------------------------------------------*/
